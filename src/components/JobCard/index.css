@@ -1,0 +1,103 @@
+.job-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+  background-color: #272727;
+  margin: 20px;
+  padding: 30px;
+  border-radius: 14px;
+}
+
+.title-logo-container {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 30px;
+}
+
+.company-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+.job-title {
+  font-size: 19px;
+  margin: 0px;
+}
+
+.rating-container {
+  display: flex;
+  align-items: center;
+  margin: 0px;
+}
+
+.star-icon {
+  color: #fbbf24;
+  margin-right: 10px;
+}
+.location-salary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.location-job-type {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-left: 20px;
+  margin-right: 5px;
+}
+
+.h-line {
+  width: 100%;
+}
+
+.description {
+  font-size: 18px;
+  font-weight: 550;
+}
+
+.employment-filters-list {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  align-items: flex-start;
+  font-size: 17px;
+}
+
+.checkbox-input {
+}
+
+.employment-filter-item {
+  margin: 10px;
+  display: flex;
+  width: 100px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.salary-range-list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.salary-item {
+  margin: 10px;
+}
+
+.radio-input {
+  margin-right: 10px;
+}

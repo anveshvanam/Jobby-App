@@ -1,0 +1,9 @@
+.profile-image {
+  width: 50px;
+  border-radius: 20px;
+  height: 50px;
+}
+
+.profile-name {
+  font-size: 20px;
+}
