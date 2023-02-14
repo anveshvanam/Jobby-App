@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import Loader from 'react-loader-spinner'
 import Cookies from 'js-cookie'
 import {Link} from 'react-router-dom'
 import {BsStarFill} from 'react-icons/bs'
@@ -68,6 +69,8 @@ class JobItemDetails extends Component {
         jobDetails: updatedData,
         apiStatus: apiStatusConstants.success,
       })
+    } else {
+      this.setState({apiStatus: apiStatusConstants.failure})
     }
   }
 
@@ -81,17 +84,34 @@ class JobItemDetails extends Component {
     title: job.title,
   })
 
-  renderJobItem = () => {
-    const {apiStatus} = this.state
+  renderLoadingView = () => (
+    <div className="job-details-loader-container" data-testid="loader">
+      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+    </div>
+  )
 
-    switch (apiStatus) {
-      case apiStatusConstants.success:
-        return this.renderJobItemSuccess()
-
-      default:
-        return null
-    }
+  onClickJobItemRetry = () => {
+    this.getJobDetails()
   }
+
+  renderFailureView = () => (
+    <div className="job-details-error-view-container">
+      <img
+        src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
+        alt="failure view"
+        className="error-view-image"
+      />
+      <h1 className="job-not-found-heading">Oops! Something Went Wrong</h1>
+      <p>We cannot seem to find the page you are looking for.</p>
+      <button
+        type="button"
+        className="job-item-retry-button"
+        onClick={this.onClickJobItemRetry}
+      >
+        Retry
+      </button>
+    </div>
+  )
 
   renderSimilarJobs = () => {
     const {similarJobs} = this.state
@@ -128,7 +148,7 @@ class JobItemDetails extends Component {
           <div className="title-logo-container">
             <img
               src={companyLogoUrl}
-              alt="company logo"
+              alt="job details company logo"
               className="company-logo"
             />
             <div className="title-container">
@@ -150,7 +170,7 @@ class JobItemDetails extends Component {
           </div>
           <hr className="h-line" />
           <div className="description-visit-link">
-            <p className="description">Description</p>
+            <h1 className="description">Description</h1>
             <div className="visit-link">
               <a href={companyWebsiteUrl} className="link">
                 Visit
@@ -163,10 +183,10 @@ class JobItemDetails extends Component {
             <h1 className="small-heading">Skills Container</h1>
             <ul className="skills-list">
               {skills.map(eachItem => (
-                <li className="skill-item">
+                <li className="skill-item" key={eachItem.name}>
                   <img
                     src={eachItem.image_url}
-                    alt="skill"
+                    alt={eachItem.name}
                     className="skill-image"
                   />
                   <p className="para">{eachItem.name}</p>
@@ -177,20 +197,36 @@ class JobItemDetails extends Component {
 
           <div className="life-at-company">
             <div className="life-at-company-text">
-              <h1 className="small-heading">Life at Compnany</h1>
+              <h1 className="small-heading">Life at Company</h1>
               <p className="para">{lifeAtCompany.description}</p>
             </div>
 
             <img
               src={lifeAtCompany.image_url}
               className="company-image"
-              alt="company"
+              alt="life at company"
             />
           </div>
         </div>
         {this.renderSimilarJobs()}
       </>
     )
+  }
+
+  renderJobItem = () => {
+    const {apiStatus} = this.state
+
+    switch (apiStatus) {
+      case apiStatusConstants.success:
+        return this.renderJobItemSuccess()
+      case apiStatusConstants.inProgress:
+        return this.renderLoadingView()
+
+      case apiStatusConstants.failure:
+        return this.renderFailureView()
+      default:
+        return <p>test</p>
+    }
   }
 
   render() {

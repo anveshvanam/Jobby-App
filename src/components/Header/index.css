@@ -20,10 +20,15 @@
   list-style-type: none;
   text-decoration: none;
   justify-content: space-between;
-  min-width: 150px;
+  align-items: center;
+  width: 80%;
   color: #ffffff;
 }
-
+.links-item {
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+}
 .nav-link {
   text-decoration: none;
   color: #ffffff;
